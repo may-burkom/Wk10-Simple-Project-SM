@@ -1,16 +1,14 @@
 const users = [
     {
-        firstName: "Jason",
-        lastName: "Williams",
+        fullName: "Jason Williams",
         age: 25,
-        email: "jwilliams@gmail.com",
+        password: "j-son_will-I-am",
         visits: 3
     },
     {
-        firstName: "Gwen",
-        lastName: "Johnnson",
+        fullName: "Gwen Johnnson",
         age: 30,
-        email: "gwenjohnnson@gmail.com",
+        password: "king-arthurs-girl",
         visits: 5
     }
 ]

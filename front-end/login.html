@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./loginStyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./indexLogin.js" defer></script>
+    <title>Project - Wk10</title>
+</head>
+<body>
+    <div id="container">
+        <div>
+            <h1>WELCOME</h1>
+            <p>
+                Click 'Login' if you are an exisiting user or 'Sign Up' if you are new to this page.
+            </p>
+        </div>
+
+        <div id="loginOpt">
+            <h3>User Login</h3>
+            <p>Enter in your full name below.</p>
+            <form id="loginForm">
+                <label for="loginFName">Full name:</label> 
+                <input id="loginFName" name="loginFName" type="text">
+
+                <input id="loginSubmitBtn" type="submit">
+            </form>
+        </div>
+
+        <div id="signUpOpt">
+            <h3>Sign Up</h3>
+            <p>Fill in the following details to sign up.</p>
+            <form id="signUpForm">
+                <label for="userFullName">Full name:</label> 
+                <input id="userFullName" name="userFullName" type="text"><br>
+                <label for="userAge"> Age:</label> 
+                <input id="userAge" name="userAge" type="number" required><br>
+                <label for="userPswrd">Password:</label> 
+                <input id="userPswrd" name="userPswrd" type="text"><br>
+
+                <input id="signUpSubmitBtn" type="submit">
+            </form>
+        </div>
+
+        <div id="displayUsers"></div>
+       
+    </div>
+</body>
+</html>

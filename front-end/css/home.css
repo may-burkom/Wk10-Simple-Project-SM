@@ -1,0 +1,18 @@
+body{
+    padding: 10px;
+    font-family: Arial;
+    background-color: khaki;
+}
+
+#loginOpt{
+    float: left;
+    margin: 10px;
+    margin-left: 150px;
+}
+
+#signUpOpt{
+    float: left;
+    margin: 10px;
+    margin-left: 200px;
+    margin-right: 300px;
+}
