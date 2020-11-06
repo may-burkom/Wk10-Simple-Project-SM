@@ -66,7 +66,15 @@ app.patch('/users/:id', function(req, res) {
     Users.findByIdAndUpdate(req.params.id, req.body, {useFindAndModify: false})
         .then(function(user) {
             console.log(user)
-            res.send(user)
+            Users.find({})
+                .then(function(allusers) {
+                    console.log(allusers)
+                    res.send(allusers)
+                })
+                .catch(function(err) {
+                    console.log(err)
+                    res.send(err)
+                })
         })
         .catch(function(err){
             console.log(err)

@@ -1,8 +1,44 @@
 console.log("indexLogin.js running...")
 
 const displayUsers = document.querySelector("#displayUsers")
+const usersHeading = document.querySelector("#usersHeading")
 const signUpForm = document.querySelector("#signUpForm")
 const loginForm = document.querySelector("#loginForm")
+
+axios.get('http://localhost:3000/display-users')
+    .then(function(response){
+        console.log(response.data)
+        let userArr = response.data
+        displayHeading()
+        userArr.forEach(renderUser)
+    })
+    .catch(function(err){
+        console.log(err)
+    })
+
+function renderUser(obj){
+    console.log(obj)
+    let userDiv = document.createElement('div')
+    let pInfo = document.createElement('p')
+    pInfo.innerHTML = `<b>${obj.fullName}</b> has visited the site <b>${obj.visits}</b> times.`
+    userDiv.appendChild(pInfo)
+    displayUsers.appendChild(userDiv)
+};
+
+function displayHeading(){
+    let heading = document.createElement('h2')
+    let line = document.createElement('hr')
+    heading.innerHTML = "Registered Users"
+    usersHeading.appendChild(line)
+    usersHeading.appendChild(heading)
+    usersHeading.appendChild(line)
+};
+
+function checkHighest(array){
+    array.forEach(function(obj){
+        
+    })
+}
 
 loginForm.addEventListener("submit", function(event){
     console.log("submit btn HIT!")
@@ -24,8 +60,13 @@ loginForm.addEventListener("submit", function(event){
             console.log(changeVisits)
 
             axios.patch(`http://localhost:3000/users/${id}`, { visits: changeVisits })
-                .then(function(x){
-                    console.log(x)
+                .then(function(response){
+                    let update = response.data
+                    console.log(update)
+                    while (displayUsers.children.length > 0){
+                        displayUsers.removeChild(displayUsers.firstChild)
+                    }
+                    update.forEach(renderUser)
                 })
                 .catch(function(err) {
                     console.log(err)
@@ -35,7 +76,7 @@ loginForm.addEventListener("submit", function(event){
         .catch(function(err) {
             console.log(err)
         })  
-    
+    loginForm.reset()
 });
 
 signUpForm.addEventListener("submit", function(event){
@@ -48,40 +89,13 @@ signUpForm.addEventListener("submit", function(event){
     
     axios.post('http://localhost:3000/sign-up', formData)
         .then(function(response) {
-            const newUser = response
+            const newUser = response.data
             console.log("post sent")
             console.log(newUser)
+            renderUser(newUser)
         })
         .catch(function(err) {
             console.log(err)
         })
     signUpForm.reset()
 });
-
-axios.get('http://localhost:3000/display-users')
-    .then(function(response){
-        console.log(response.data)
-        let userArr = response.data
-
-        let heading = document.createElement('h2')
-        let line = document.createElement('hr')
-        heading.innerHTML = "Registered Users"
-        displayUsers.appendChild(line)
-        displayUsers.appendChild(heading)
-        displayUsers.appendChild(line)
-
-        userArr.forEach(renderUser)
-    })
-    .catch(function(err){
-        console.log(err)
-    })
-
-function renderUser(obj){
-    console.log(obj)
-
-    let userDiv = document.createElement('div')
-    let pInfo = document.createElement('p')
-    pInfo.innerHTML = `<b>${obj.fullName}</b> has visited the site <b>${obj.visits}</b> times.`
-    userDiv.appendChild(pInfo)
-    displayUsers.appendChild(userDiv)
-}
